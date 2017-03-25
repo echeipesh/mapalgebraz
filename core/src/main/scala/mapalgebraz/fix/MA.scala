@@ -22,6 +22,7 @@ final case class Sub[T](args: T*) extends MA[T]
 final case class Mul[T](args: T*) extends MA[T]
 final case class Div[T](args: T*) extends MA[T]
 
+// should this ever actually need anything other than Symbol ref?
 
 
 object FixNDVI {
@@ -39,7 +40,7 @@ object CofreeNDVI {
   val sum: Cofree[MA, String] = Cofree[MA, String]("id-sum", Add(nir, red))
   val diff: Cofree[MA, String] = Cofree[MA, String]("id-diff", Sub(nir, red))
   val ndvi: Cofree[MA, String] = Cofree[MA, String]("id-ndvi", Div(diff, sum))
-  // That gave us labels for every node
+  // That gave us labels for every node, thats useful
 }
 
 object FreeNDVI {
