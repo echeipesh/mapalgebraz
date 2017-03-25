@@ -25,10 +25,14 @@ lazy val commonSettings = Seq(
     "com.slamdata"                %% "matryoshka-core"   % "0.18.3"
   ),
 
+  addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.3" cross CrossVersion.binary),
+
   parallelExecution in Test := false,
 
   shellPrompt := { s => Project.extract(s).currentProject.id + " > " }
 )
+
+
 
 lazy val root = Project("root", file(".")).aggregate(core)
 
