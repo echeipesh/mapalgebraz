@@ -1,15 +1,16 @@
 package core.fix
 
-import scala.language.higherKinds
-
 import scalaz._
+import matryoshka.data.Fix
 
-case class Fix[T[_]](unfix: T[Fix[T]])
+
+// case class Fix[T[_]](unfix: T[Fix[T]])
 // case class Cofree[T[_], A](head: A, tail: T[Cofree[T, A]])
 // case class Free[F[_], A](resume: A \/ F[Free[F, A]])
 
 /**
- * T type parameter varries over the type of recursion rather than leaf type.
+ * T type parameter varries over the type of recursion rather than the leaf type.
+ * T is NOT the return type of the this thing.
  * - If all we only care about type change at leaves, use Free ?
  */
 trait MA[T]{
@@ -55,6 +56,17 @@ object FreeNDVI {
 
 
   // Can I mix Free and Cofree to get labels on my DSL nodes ?
+  // TODO: Now we should try to write an interpreter and see what is missing
+  val nt = new (MA ~> Option) {
+    /** How is this going to work ... */
+    def apply[A](fa: MA[A]): Option[A] = fa match {
+      // this isn't even good and its the best we can do. A == T
+      // ... we need a type to capture the result type of the operation
+      case Var(name) if name == 'nir => Some(fa.args.head)
+    }
+
+  }
+
 }
 
 // TODO: Free with labels => Free with Cofree ?

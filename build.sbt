@@ -21,7 +21,8 @@ lazy val commonSettings = Seq(
     "io.circe"                    %% "circe-core"        % "0.7.0",
     "io.circe"                    %% "circe-generic"     % "0.7.0",
     "io.circe"                    %% "circe-parser"      % "0.7.0",
-    "io.circe"                    %% "circe-optics"      % "0.7.0"
+    "io.circe"                    %% "circe-optics"      % "0.7.0",
+    "com.slamdata"                %% "matryoshka-core"   % "0.18.3"
   ),
 
   parallelExecution in Test := false,
